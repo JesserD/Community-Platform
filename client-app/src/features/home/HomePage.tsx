@@ -12,20 +12,20 @@ const HomePage = () => {
         <Flex p='auto' textAlign='center' className='masthead'>
             <VStack  >
                 <HStack as={'h1'} alignItems={'center'}>
-                    <Image  boxSize={'80px'} src={'/assets/appImages/MessengerIconL.png'} style={{ marginBottom: 12 }} />
-                    <Text fontSize={'3xl'}>Community</Text>
+                    <Image  boxSize={'80px'} src={'/assets/appImages/WhatsAppIcon.png'} style={{ marginBottom: 12 }} />
+                    <Text fontSize='3xl' fontFamily='cursive'>WhatsApp Clone</Text>
                 </HStack>
                 <VStack width='full'>
                     {isLoggedIn ? (
                         <>
-                            <Heading as='h2' >Welcome to Community</Heading>
-                            <Button as={Link} to='/dashboard' size='md' colorScheme={'messenger'}>Go to the conversations</Button>
-                            <Button colorScheme={'messenger'} onClick={logout}>Logout</Button>
+                            <Heading as='h2' >Welcome to WhatsApp Clone</Heading>
+                            <Button as={Link} to='/dashboard' size='md' colorScheme='whatsapp'>Go to the conversations</Button>
+                            <Button colorScheme='whatsapp' onClick={logout}>Logout</Button>
                         </>
                     ) : (
                         <Flex direction='row' columnGap={2} w='full' p='auto' alignContent='stretch'>
                             <Button onClick={() => modalStore.openModal(<LoginForm />)}
-                             w='full' size='lg' colorScheme={'messenger'} >
+                             w='full' size='lg' colorScheme='whatsapp' >
                                 Login
                             </Button>
                             <Button onClick={() => modalStore.openModal(<RegisterForm />)}

@@ -9,7 +9,7 @@ const LoadingComponent = ({message}: Props) => {
     return (
         <Box padding='25% 0' textAlign='center'>
             <VStack>
-            <CircularProgress isIndeterminate size='70px' thickness='4px' color={'blue.500'}/>
+            <CircularProgress isIndeterminate size='70px' thickness='4px' color={'green.300'}/>
             <Text>{message.concat('...')}</Text>
             </VStack>
         </Box>

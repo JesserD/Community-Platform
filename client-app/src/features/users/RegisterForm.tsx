@@ -25,7 +25,7 @@ const RegisterForm = () => {
             {({ handleSubmit, isSubmitting, errors }) => (
                 <Form onSubmit={handleSubmit} autoComplete='off'>
                     <ModalBody pb={6}>
-                        <ModalHeader as='h2' fontSize='lg' color={'blue.500'}>Sign up to Community</ModalHeader>
+                        <ModalHeader as='h2' fontSize='lg' color={'green.400'}>Sign up to WhatsApp Clone</ModalHeader>
                         <FormControl mt={4} isInvalid={errors.error ? true : false} >
                             <FormErrorMessage >
                                 <ValidationErrors errors={errors.error} />
@@ -37,7 +37,7 @@ const RegisterForm = () => {
                         </FormControl>
                     </ModalBody>
                     <ModalFooter>
-                        <Button isLoading={isSubmitting} colorScheme={'messenger'} type='submit' >Register</Button>
+                        <Button isLoading={isSubmitting} colorScheme='whatsapp' type='submit' >Register</Button>
                     </ModalFooter>
                 </Form>
             )}

@@ -16,7 +16,7 @@ const LoginForm = () => {
             {({ handleSubmit, isSubmitting, errors }) => (
                 <Form onSubmit={handleSubmit} autoComplete='off'>
                     <ModalBody pb={6}>
-                    <ModalHeader as='h2' fontSize='lg' color={'blue.500'}>Login to Community</ModalHeader>
+                    <ModalHeader as='h2' fontSize='lg' color='green.400'>Login to WhatsApp Clone</ModalHeader>
                         <FormControl mt={4} isInvalid={errors.error ? true : false}>
                             <FormErrorMessage ><Alert status='error' >
                                 <AlertIcon />
@@ -27,7 +27,7 @@ const LoginForm = () => {
                         </FormControl>
                     </ModalBody>
                     <ModalFooter>
-                        <Button isLoading={isSubmitting} colorScheme={'messenger'} type='submit' >Login</Button>
+                        <Button isLoading={isSubmitting} colorScheme='whatsapp' type='submit' >Login</Button>
                     </ModalFooter>
                 </Form>
             )}

@@ -24,7 +24,7 @@ namespace API.Extensions
             {
                 config.RegisterValidatorsFromAssemblyContaining<Create>();
             });
-            services.AddDbContext<DataContext>(options => options.UseSqlServer(config.GetConnectionString("DataContextConnection")));
+            services.AddDbContext<DataContext>(options => options.UseSqlite(config.GetConnectionString("DataContextConnection")));
 
             services.AddEndpointsApiExplorer();
             services.AddSwaggerGen();

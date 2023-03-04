@@ -18,6 +18,7 @@ namespace API.Extensions
                 var userManager = services.GetRequiredService<UserManager<AppUser>>();
                 //context.Database.EnsureDeleted();
                 await context.Database.MigrateAsync();
+                await context.Database.EnsureCreatedAsync();
                 await Seed.SeedData(context, userManager);
             }
             catch (Exception ex)

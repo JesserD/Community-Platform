@@ -18,11 +18,7 @@ code {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-image: linear-gradient(
-    rgb(255, 143, 178) 0%,
-    rgb(167, 151, 255) 50%,
-    rgb(0, 229, 255) 100%
-  );
+  background-image: linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%);
   height: 100vh;
   width: 100%;
 }
