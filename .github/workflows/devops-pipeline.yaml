@@ -47,7 +47,7 @@ jobs:
 
     - name: Create Azure Resources
       run: |
-        az group create --name $AZURE_RESOURCE_GROUP --location northeurope
+        az group create --name $AZURE_RESOURCE_GROUP --location switzerlandnorth
         az deployment group create --resource-group $AZURE_RESOURCE_GROUP --template-file azure-infrastructure/main.bicep --parameters appName=$AZURE_WEBAPP_NAME appServicePlanName=$AZURE_APPSERVICEPLAN_NAME CloudName=$CLOUDINARY_CLOUDNAME ApiKey=$CLOUDINARY_APIKEY ApiSecret=$CLOUDINARY_APISECRET tokenKey=$TOKENKEY
 
     - name: Deploy to Azure App Service

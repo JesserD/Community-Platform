@@ -41,7 +41,14 @@ namespace API.Extensions
             services.AddAutoMapper(typeof(MappingProfiles).Assembly);
             services.AddScoped<IUserAccessor, UserAccessor>();
             services.AddScoped<IPhotoAccessor, PhotoAccessor>();
-            services.Configure<CloudinarySettings>(config.GetSection("Cloudinary"));
+            var sectionName = "Cloudinary";
+            var cloudinaryValues = new Dictionary<string, string> {
+                { $"{sectionName}:CloudName", Environment.GetEnvironmentVariable($"CUSTOMCONNSTR_CloudName") ?? config[$"{sectionName}:CloudName"] },
+                { $"{sectionName}:ApiKey", Environment.GetEnvironmentVariable($"CUSTOMCONNSTR_ApiKey") ?? config[$"{sectionName}:ApiKey"] },
+                { $"{sectionName}:ApiSecret", Environment.GetEnvironmentVariable($"CUSTOMCONNSTR_ApiSecret") ?? config[$"{sectionName}:ApiSecret"] }
+            };
+            var customConfig = new ConfigurationBuilder().AddInMemoryCollection(cloudinaryValues).Build();
+            services.Configure<CloudinarySettings>(customConfig.GetSection(sectionName));
             services.AddSignalR();
 
             return services;

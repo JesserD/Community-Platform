@@ -65,7 +65,7 @@ resource appServiceApp 'Microsoft.Web/sites@2021-02-01' = {
           ipAddress: '0.0.0.0/0'
         }
       ]
-      linuxFxVersion: 'DOTNETCORE|6.0'
+      linuxFxVersion: 'DOTNETCORE|7.0'
     }
   }
   identity: {
