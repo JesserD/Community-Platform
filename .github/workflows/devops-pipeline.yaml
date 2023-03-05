@@ -1,0 +1,61 @@
+name: WhatsAppClone CI/CD
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+
+  build_and_deploy:
+    runs-on: ubuntu-latest
+    env:
+      AZURE_WEBAPP_NAME: ${{ vars.AZURE_WEBAPP_NAME }}
+      AZURE_RESOURCE_GROUP: ${{ vars.AZURE_RESOURCE_GROUP }}
+      AZURE_APPSERVICEPLAN_NAME: ${{ vars.AZURE_APPSERVICEPLAN_NAME }}
+      CLOUDINARY_CLOUDNAME: ${{ secrets.CLOUDINARY_CLOUDNAME }}
+      CLOUDINARY_APIKEY: ${{ secrets.CLOUDINARY_APIKEY }}
+      CLOUDINARY_APISECRET: ${{ secrets.CLOUDINARY_APISECRET }}
+      TOKENKEY: ${{ secrets.TOKENKEY }}
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+      id: checkout
+
+    - uses: actions/setup-node@v3
+      with:
+        node-version: 16
+
+    - name: Build and Publish
+      run: |
+        cd client-app
+        npm ci
+        npm run build
+        cd ..
+        dotnet build --configuration Release
+        cd API
+        dotnet publish API.csproj -c Release -o ./dotnet-webapp 
+        cp whatsapp-clone.db ./dotnet-webapp 
+        cd dotnet-webapp 
+        zip -r webapp.zip .
+
+    - uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+    - name: Create Azure Resources
+      run: |
+        az group create --name $AZURE_RESOURCE_GROUP --location northeurope
+        az deployment group create --resource-group $AZURE_RESOURCE_GROUP --template-file azure-infrastructure/main.bicep --parameters appName=$AZURE_WEBAPP_NAME appServicePlanName=$AZURE_APPSERVICEPLAN_NAME CloudName=$CLOUDINARY_CLOUDNAME ApiKey=$CLOUDINARY_APIKEY ApiSecret=$CLOUDINARY_APISECRET tokenKey=$TOKENKEY
+
+    - name: Deploy to Azure App Service
+      uses: azure/webapps-deploy@v2
+      with: 
+        app-name: ${{ env.AZURE_WEBAPP_NAME }}
+        package: API/dotnet-webapp/*.zip
+
+    - name: logout
+      run: az logout
+
