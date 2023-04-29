@@ -11,6 +11,6 @@ A centralized instant messaging service where users can register, login, and tex
 ## Link to the web application
 This web application is available via the following link :
 
-[app-dev-reactivities.azurewebsites.net](https://app-dev-whatsappclone.azurewebsites.net/)
+[app-dev-whatsappclone.azurewebsites.net](https://app-dev-whatsappclone.azurewebsites.net/)
 
-When registering, you need to enter a strong password like : Pa$$w32rd
+When registering, you need to enter a strong password like : Pa$$w0rd
